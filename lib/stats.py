@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QLabel, QMainWindow, QPushButton, QWidget
+from PyQt5.QtWidgets import QLabel, QMainWindow
 
 
 class WindowStats(QMainWindow):
@@ -13,7 +13,7 @@ class WindowStats(QMainWindow):
                 'Бронирование товаров в магазине\n'.format(self.output_string(self.data)), self
             )
         self.resize(800, 300)  # Тут всего 2 константы, поэтому не стал записывать в отдельный файл
-        self.label.resize(800, 100)
+        self.label.resize(800, 300)
 
     def renew_data(self, data):
         self.label.setText('Бронирование товаров в магазине\n {}'.format(self.output_string(data)))
@@ -21,6 +21,6 @@ class WindowStats(QMainWindow):
     @staticmethod
     def output_string(data):
         output = ''
-        for element in data.items():
+        for element in sorted(data.items()):
             output += str(element[0]) + ' ---> ' + str(element[1]) + '\n'
         return output
