@@ -56,7 +56,10 @@ class ShopWindow(QMainWindow):
     def on_click(self):
         sender = self.sender()
         key = sender.text().split('\n')[0][:-1]
-        self.data = requests.post('http://127.0.0.1:8000/post-data', data={'item': key}).json()
+        if self.data_flag is not None:  # TEST-MODE
+            self.data[key] -= 1
+        else:
+            self.data = requests.post('http://127.0.0.1:8000/post-data', data={'item': key}).json()
         self.have_booked = requests.post('http://127.0.0.1:8000/post-users',
                                          data={'username': self.name, 'item': key}).json()
 
